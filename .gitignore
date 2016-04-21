@@ -53,3 +53,5 @@ captures/
 gen-external-apklibs
 
 apisecrets.xml
+
+.idea/
