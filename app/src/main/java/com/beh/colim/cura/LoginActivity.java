@@ -1,10 +1,11 @@
 package com.beh.colim.cura;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.firebase.client.Firebase;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -19,6 +20,10 @@ public class LoginActivity extends AppCompatActivity {
 
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        // Firebase
+        Firebase.setAndroidContext(this);
+        // More @ https://www.firebase.com/docs/android/quickstart.html
     }
 
 
