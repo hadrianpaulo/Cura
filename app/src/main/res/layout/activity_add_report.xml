@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.beh.colim.cura.AddReportActivity">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical" android:id="@+id/linearLayout">
+
+        <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@+id/linearLayout" android:padding="30dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Add Report"
+                android:id="@+id/textView" android:layout_gravity="center_horizontal" android:textSize="35sp"
+                android:textColor="#1ab9ff" android:layout_margin="10dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Drug name"
+                android:id="@+id/tv_addReport_drugname" android:textSize="15sp"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_addReport_drugname" android:hint="Enter Drug Name" android:textSize="15sp"
+                android:textColor="@android:color/black"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Price"
+                  android:id="@+id/tv_addReport_price" android:textSize="15sp" android:layout_marginTop="20dp"/>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                  android:id="@+id/et_addReport_price" android:hint="Enter Price" android:textSize="15dp"
+                  android:textColor="@android:color/black" android:numeric="decimal"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drugstore Name"
+                  android:id="@+id/tv_addReport_drugstore" android:textSize="15sp" android:layout_marginTop="20dp"/>
+        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/et_addReport_drugstore"
+                  android:hint="Enter Drugstore Name" android:textSize="15sp" android:textColor="@android:color/black"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drug Availability"
+                  android:id="@+id/tv_addReport_available" android:textSize="15sp" android:layout_marginTop="20dp"/>
+        <RelativeLayout
+                android:layout_width="332dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="40dp" android:paddingRight="40dp" android:layout_marginTop="5dp">
+            <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Not Available"
+                         android:id="@+id/rb_addReport_notAvailable" android:checked="false"
+                         android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+                         android:layout_alignParentEnd="true" android:textColor="@android:color/tertiary_text_dark"
+                         android:clickable="true"/>
+            <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:id="@+id/rb_addReport_available" android:checked="true"
+                    android:textColor="@android:color/tertiary_text_dark" android:clickable="true"/>
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="192dp"
+                android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp">
+            <Button style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" android:layout_width="84dp"
+                    android:layout_height="31dp" android:text="Add" android:id="@+id/b_addReport_add"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#e8f3ff" android:onClick="add"/>
+            <Button style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" android:layout_width="84dp"
+                    android:layout_height="31dp" android:text="Clear" android:id="@+id/b_addReport_clear"
+                    android:layout_gravity="center_horizontal"
+                    android:background="#e8f3ff"
+                    android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" android:onClick="clear"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>

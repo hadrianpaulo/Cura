@@ -8,11 +8,56 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:orientation="vertical">
+            android:orientation="vertical" android:id="@+id/linearLayout">
 
         <include
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@+id/linearLayout" android:weightSum="1"
+            android:onClick="login" android:padding="30dp">
+        <ImageView
+                android:layout_width="156dp"
+                android:layout_height="146dp"
+                android:contentDescription="Application logo"
+                android:id="@+id/iv_login_logo" android:layout_gravity="center_horizontal"
+                android:src="@drawable/logo_name" android:layout_margin="10dp"/>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:paddingTop="20dp" android:weightSum="1">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Username"
+                    android:id="@+id/tv_login_uname"
+                    android:textSize="15sp"/>
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_login_uname" android:hint="Enter Username" android:textSize="15dp"
+                    android:textColor="@android:color/black"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Password"
+                      android:id="@+id/tv_login_pw" android:textSize="15sp" android:layout_marginTop="20dp"/>
+            <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:id="@+id/et_login_pw" android:hint="Enter Password" android:textSize="15sp"
+                      android:textColor="@android:color/black" android:password="true" android:typeface="normal"/>
+            <Button
+                    android:layout_width="84dp"
+                    android:layout_height="31dp"
+                    android:text="Login"
+                    android:id="@+id/b_login_login"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp" style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:background="#e8f3ff"/>
+            <Button style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" android:layout_width="190dp"
+                    android:layout_height="31dp" android:text="Log in with Google" android:id="@+id/b_login_google"
+                    android:layout_gravity="center_horizontal" android:layout_marginTop="50dp"
+                    android:background="#e8f3ff" android:onClick="login_google"/>
+        </LinearLayout>
     </LinearLayout>
 
 

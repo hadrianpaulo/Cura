@@ -15,4 +15,9 @@
     <string name="title_messages">Messages</string>
     <string name="title_friends">Friends</string>
     <string name="title_home">Home</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_add_report">AddReportActivity</string>
+    <string name="title_activity_seach">SeachActivity</string>
 </resources>

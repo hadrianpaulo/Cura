@@ -1,0 +1,30 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.beh.colim.cura.SearchActivity">
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="vertical" android:id="@+id/linearLayout">
+
+        <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar" />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:layout_below="@+id/linearLayout" android:padding="30dp">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Search"
+                  android:id="@+id/tv_search_search" android:layout_margin="50dp" android:layout_gravity="center_horizontal"
+                  android:textSize="35sp" android:typeface="sans" android:textColor="#1ab9ff"/>
+        <SearchView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/searchView" android:layout_gravity="center_horizontal" android:onClick="search"/>
+    </LinearLayout>
+</RelativeLayout>
