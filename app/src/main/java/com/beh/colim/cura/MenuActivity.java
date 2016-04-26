@@ -7,9 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 public class MenuActivity extends AppCompatActivity {
     private Toolbar m_t_toolbar;
+    private CuraApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +20,12 @@ public class MenuActivity extends AppCompatActivity {
 
         m_t_toolbar = (Toolbar) findViewById(R.id.toolbar);
         m_t_toolbar.setTitle("Menu");
+
+        setSupportActionBar(m_t_toolbar);
+
+        app = (CuraApplication) getApplication();
+        Toast.makeText(MenuActivity.this, app.getM_s_username(), Toast.LENGTH_SHORT).show();
+
     }
 
     public void addReport(View view){
