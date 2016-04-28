@@ -21,9 +21,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.plus.Plus;
 
 import java.io.IOException;
 
@@ -75,6 +78,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .build();
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(Plus.API)
+                .addScope(new Scope(Scopes.PROFILE))
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
                 .build();
@@ -117,9 +123,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     public void login_google(View view){
-        progressDialog(true, "Loading google accounts...");
+        Log.d(TAG, "login_google clicked");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-        progressDialog(false, "");
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
@@ -166,16 +171,17 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         mFirebaseRef.authWithOAuthToken("google", token, new AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
-                                progressDialog(false, "");
+//                                progressDialog(false, "");
                                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onAuthenticationError(FirebaseError firebaseError) {
+//                                progressDialog(false, "");
                                 Toast.makeText(LoginActivity.this, "Authentication error with Firebase",
                                         Toast.LENGTH_SHORT).show();
-                                progressDialog(false, "");
+
                             }
                         });
                     } else {
