@@ -22,6 +22,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
 
 import java.io.IOException;
 
@@ -32,60 +34,73 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private static final String TAG = "LoginActivity";
     private static final int RC_SIGN_IN = 9001;
 
-    private Toolbar m_t_toolbar;
+    private Toolbar toolbar;
     private EditText m_et_uname;
     private EditText m_et_pw;
 
-    private Firebase m_firebase_ref;
-    private ProgressDialog m_pd_auth;
-    private GoogleApiClient m_client_google;
-    private GoogleSignInOptions m_gso;
+    private Firebase mFirebaseRef;
+    private ProgressDialog mPdAuth;
+    private GoogleApiClient mGoogleApiClient;
+    private GoogleSignInOptions mGso;
 
     private CuraApplication app;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        m_t_toolbar = (Toolbar) findViewById(R.id.toolbar);
-        m_t_toolbar.setTitle("Login");
+        // toolbar
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("Login");
+        setSupportActionBar(toolbar);
 
-        setSupportActionBar(m_t_toolbar);
-
+        // application
         app = (CuraApplication) getApplication();
 
-        // Edit texts
+        // edit texts
         m_et_uname = (EditText) findViewById(R.id.et_login_uname);
         m_et_pw = (EditText) findViewById(R.id.et_login_pw);
 
-        // Firebase
+        // firebase setup
         setAndroidContext(this);
-        m_firebase_ref = new Firebase("https://cura.firebaseio.com/");
+        mFirebaseRef = new Firebase("https://cura.firebaseio.com/");
 
-        m_pd_auth = new ProgressDialog(this);
-        m_pd_auth.setTitle("Loading..");
-        m_pd_auth.setMessage("Authenticating with Firebase");
+        // signing in variables
+        mPdAuth = new ProgressDialog(this);
 
-        m_gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        mGso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
 
-        m_client_google = new GoogleApiClient.Builder(this)
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, m_gso)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
                 .build();
     }
 
-    public void login(View view){
+    private void progressDialog(boolean show, String message){
+        if(show) {
+            mPdAuth.setTitle("Loading..");
+            mPdAuth.setMessage(message);
+            mPdAuth.show();
+        }
+        else {
+            mPdAuth.hide();
+        }
+    }
+
+    public void login_uname_pw(View view){
         final String s_uname = m_et_uname.getText().toString();
         final String s_pw = m_et_pw.getText().toString();
 
-        m_pd_auth.show();
+        progressDialog(true, "Logging in using email and password..");
 
-        m_firebase_ref.authWithPassword(s_uname, s_pw, new AuthResultHandler() {
+        mFirebaseRef.authWithPassword(s_uname, s_pw, new AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
-                m_pd_auth.hide();
+                progressDialog(false, "");
                 Log.d(TAG, "Successful login");
                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                 startActivity(intent);
@@ -93,22 +108,24 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             @Override
             public void onAuthenticationError(FirebaseError firebaseError) {
-                m_pd_auth.hide();
-                Toast.makeText(LoginActivity.this, "Enter registered user credentials.", Toast.LENGTH_SHORT).show();
+                progressDialog(false, "");
+                Toast.makeText(LoginActivity.this, "Enter registered user credentials",
+                        Toast.LENGTH_SHORT).show();
                 Log.e(TAG, String.valueOf(firebaseError));
             }
         });
     }
 
     public void login_google(View view){
-        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(m_client_google);
+        progressDialog(true, "Loading google accounts...");
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        progressDialog(false, "");
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -118,15 +135,15 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        m_pd_auth.show();
+        progressDialog(true, "Signing in...");
         if (result.isSuccess()) {
-            // Signed in successfully, show authenticated UI.
             GoogleSignInAccount acct = result.getSignInAccount();
             Toast.makeText(LoginActivity.this, acct.getDisplayName(), Toast.LENGTH_SHORT).show();
             app.setM_s_username(acct.getDisplayName());
 
             final String email = acct.getEmail();
             AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+                String errorMessage = null;
                 @Override
                 protected String doInBackground(Void... voids) {
                     String scopes = "oauth2:profile email";
@@ -134,8 +151,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     try {
                         token = GoogleAuthUtil.getToken(getApplicationContext(), email, scopes);
                     } catch (IOException e) {
+                        errorMessage = "Network error: " + e.getMessage();
                         e.printStackTrace();
                     } catch (GoogleAuthException e) {
+                        errorMessage = "Authentication error: " + e.getMessage();
                         e.printStackTrace();
                     }
                     return token;
@@ -144,29 +163,31 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 protected void onPostExecute(String token){
                     if (token != null) {
                     /* Successfully got OAuth token, now login with Google */
-                        m_firebase_ref.authWithOAuthToken("google", token, new AuthResultHandler() {
+                        mFirebaseRef.authWithOAuthToken("google", token, new AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
-                                m_pd_auth.hide();
+                                progressDialog(false, "");
                                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onAuthenticationError(FirebaseError firebaseError) {
-
+                                Toast.makeText(LoginActivity.this, "Authentication error with Firebase",
+                                        Toast.LENGTH_SHORT).show();
+                                progressDialog(false, "");
                             }
                         });
                     } else {
-                        Toast.makeText(LoginActivity.this, "Aw", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "No token received: " + errorMessage,
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             };
             task.execute();
 
-
         } else {
-            //signed out
+            Toast.makeText(LoginActivity.this, "Signing in failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -195,6 +216,22 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.d(TAG, "onConnectionFailed:" + connectionResult);
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        if(mGoogleApiClient.isConnected()){
+            Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                    new ResultCallback<Status>() {
+                        @Override
+                        public void onResult(@NonNull Status status) {
+                            Log.d(TAG, "User logged out");
+                        }
+                    }
+            );
+            mGoogleApiClient.disconnect();
+        }
     }
 }
 
