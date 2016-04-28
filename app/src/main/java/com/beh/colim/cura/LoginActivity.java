@@ -124,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     public void login_google(View view){
         Log.d(TAG, "login_google clicked");
+        progressDialog(true, "Loading sign in box");
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
@@ -140,7 +141,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private void handleSignInResult(GoogleSignInResult result) {
         Log.d(TAG, "handleSignInResult:" + result.isSuccess());
-        progressDialog(true, "Signing in...");
+        progressDialog(true, "Signing in to your google account");
         if (result.isSuccess()) {
             GoogleSignInAccount acct = result.getSignInAccount();
             Toast.makeText(LoginActivity.this, acct.getDisplayName(), Toast.LENGTH_SHORT).show();
@@ -171,14 +172,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         mFirebaseRef.authWithOAuthToken("google", token, new AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
-//                                progressDialog(false, "");
+                                progressDialog(false, "");
                                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
                                 startActivity(intent);
                             }
 
                             @Override
                             public void onAuthenticationError(FirebaseError firebaseError) {
-//                                progressDialog(false, "");
+                                progressDialog(false, "");
                                 Toast.makeText(LoginActivity.this, "Authentication error with Firebase",
                                         Toast.LENGTH_SHORT).show();
 
@@ -193,6 +194,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             task.execute();
 
         } else {
+            progressDialog(false, "");
             Toast.makeText(LoginActivity.this, "Signing in failed", Toast.LENGTH_SHORT).show();
         }
     }
