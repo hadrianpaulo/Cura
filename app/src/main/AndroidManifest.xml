@@ -13,13 +13,13 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
-        android:name=".CuraApplication"
-        android:allowBackup="true"
-        android:icon="@drawable/logo"
-        android:label="@string/app_name"
-        android:supportsRtl="true"
-        android:theme="@style/CuraTheme" >
-        <activity android:name=".LoginActivity" >
+            android:name=".activities.CuraApplication"
+            android:allowBackup="true"
+            android:icon="@drawable/logo"
+            android:label="@string/app_name"
+            android:supportsRtl="true"
+            android:theme="@style/CuraTheme">
+        <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,20 +39,20 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".LocatorActivity"
-            android:label="@string/title_activity_locator" >
+                android:name=".activities.LocatorActivity"
+                android:label="@string/title_activity_locator">
         </activity>
         <activity
-            android:name=".MenuActivity"
-            android:label="@string/title_activity_menu" >
+                android:name=".activities.MenuActivity"
+                android:label="@string/title_activity_menu">
         </activity>
         <activity
-            android:name=".AddReportActivity"
-            android:label="@string/title_activity_add_report" >
+                android:name=".activities.AddReportActivity"
+                android:label="@string/title_activity_add_report">
         </activity>
         <activity
-            android:name=".SearchActivity"
-            android:label="@string/title_activity_seach" >
+                android:name=".activities.SearchActivity"
+                android:label="@string/title_activity_seach">
         </activity>
     </application>
 

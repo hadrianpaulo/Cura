@@ -1,13 +1,15 @@
-package com.beh.colim.cura;
+package com.beh.colim.cura.activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.beh.colim.cura.R;
 
 public class MenuActivity extends AppCompatActivity {
     private Toolbar m_t_toolbar;
@@ -24,7 +26,7 @@ public class MenuActivity extends AppCompatActivity {
         setSupportActionBar(m_t_toolbar);
 
         app = (CuraApplication) getApplication();
-        Toast.makeText(MenuActivity.this, app.getM_s_username(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(MenuActivity.this, app.getUsername(), Toast.LENGTH_SHORT).show();
 
     }
 

@@ -1,12 +1,13 @@
-package com.beh.colim.cura;
+package com.beh.colim.cura.activities;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
+
+import com.beh.colim.cura.R;
 
 public class AddReportActivity extends AppCompatActivity {
 
@@ -17,7 +18,8 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     public void add(View view){
-        // Add report in db
+        // TODO: Implement GET and POST logic
+
         Toast.makeText(this, "Report is added.", Toast.LENGTH_SHORT).show();
     }
 
