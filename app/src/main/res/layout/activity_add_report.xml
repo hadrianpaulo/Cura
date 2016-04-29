@@ -46,22 +46,45 @@
                   android:hint="Enter Drugstore Name" android:textSize="15sp" android:textColor="@android:color/black"/>
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drug Availability"
                   android:id="@+id/tv_addReport_available" android:textSize="15sp" android:layout_marginTop="20dp"/>
+
         <RelativeLayout
-                android:layout_width="332dp"
-                android:layout_height="wrap_content"
-                android:paddingLeft="40dp" android:paddingRight="40dp" android:layout_marginTop="5dp">
-            <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Not Available"
-                         android:id="@+id/rb_addReport_notAvailable" android:checked="false"
-                         android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-                         android:layout_alignParentEnd="true" android:textColor="@android:color/tertiary_text_dark"
-                         android:clickable="true"/>
-            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="53dp">
+
+            <Switch
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Available"
-                    android:id="@+id/rb_addReport_available" android:checked="true"
-                    android:textColor="@android:color/tertiary_text_dark" android:clickable="true"/>
+                    android:layout_gravity="center_horizontal"
+                    android:id="@+id/sw_addReport_availability"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unavailable"
+                    android:id="@+id/textView2"
+                    android:textSize="15sp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/sw_addReport_availability"
+                    android:layout_toStartOf="@+id/sw_addReport_availability"
+                    android:layout_marginRight="25dp"
+                    android:layout_marginEnd="25dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Unavailable"
+                    android:id="@+id/textView3"
+                    android:textSize="15sp"
+                    android:layout_alignTop="@+id/textView2"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginRight="26dp"
+                    android:layout_marginEnd="26dp"/>
+
         </RelativeLayout>
+
         <RelativeLayout
                 android:layout_width="192dp"
                 android:layout_height="wrap_content" android:layout_gravity="center_horizontal"

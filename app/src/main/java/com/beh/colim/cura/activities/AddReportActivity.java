@@ -5,10 +5,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.beh.colim.cura.R;
+import com.beh.colim.cura.utils.DrugDetails;
+import com.beh.colim.cura.utils.Location;
 import com.firebase.client.Firebase;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class AddReportActivity extends AppCompatActivity {
 
@@ -19,9 +28,23 @@ public class AddReportActivity extends AppCompatActivity {
     }
 
     public void add(View view){
-        // TODO: Implement GET and POST logic
-        Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
 
+        Firebase ref = new Firebase("https://cura.firebaseio.com/drugs");
+        String drug_name = ((EditText) findViewById(R.id.et_addReport_drugname))
+                .getText().toString();
+        String price = ((EditText) findViewById(R.id.et_addReport_price))
+                .getText().toString();
+        String drugstore_name = ((EditText) findViewById(R.id.et_addReport_drugstore))
+                .getText().toString();
+        Boolean availability = ((Switch) findViewById(R.id.sw_addReport_availability)).isChecked();
+
+        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm", Locale.US);
+        String date = df.format(Calendar.getInstance().getTime());
+
+        Location someplace = new Location("12.42", "12.12", drugstore_name);
+        DrugDetails sample = new DrugDetails(price, availability, date);
+        sample.addLocation(someplace);
+        ref.child(drug_name).push().setValue(sample);
 
         Toast.makeText(this, "Report is added.", Toast.LENGTH_SHORT).show();
     }
