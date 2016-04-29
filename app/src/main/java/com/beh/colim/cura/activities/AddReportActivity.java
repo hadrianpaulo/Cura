@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.beh.colim.cura.R;
+import com.firebase.client.Firebase;
 
 public class AddReportActivity extends AppCompatActivity {
 
@@ -19,6 +20,8 @@ public class AddReportActivity extends AppCompatActivity {
 
     public void add(View view){
         // TODO: Implement GET and POST logic
+        Firebase ref = new Firebase("https://docs-examples.firebaseio.com/web/saving-data/fireblog/posts");
+
 
         Toast.makeText(this, "Report is added.", Toast.LENGTH_SHORT).show();
     }

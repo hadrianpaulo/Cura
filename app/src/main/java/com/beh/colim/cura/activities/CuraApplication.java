@@ -2,6 +2,8 @@ package com.beh.colim.cura.activities;
 
 import android.app.Application;
 
+import com.firebase.client.Firebase;
+
 /**
  * Created by jerelynco on 4/25/16.
  */
@@ -9,6 +11,15 @@ public class CuraApplication extends Application {
     private String username = "";
     private String lat = "";
     private String lon = "";
+    private Firebase firebaseRef;
+
+    public Firebase getFirebaseRef() {
+        return firebaseRef;
+    }
+
+    public void setFirebaseRef(Firebase firebaseRef) {
+        this.firebaseRef = firebaseRef;
+    }
 
     public String getUsername() {
         return username;

@@ -47,7 +47,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private EditText m_et_uname;
     private EditText m_et_pw;
 
-    private Firebase mFirebaseRef;
     private ProgressDialog mPdAuth;
     private GoogleApiClient mGoogleApiClient;
     private GoogleSignInOptions mGso;
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         // firebase setup
         setAndroidContext(this);
-        mFirebaseRef = new Firebase("https://cura.firebaseio.com/");
+        app.setFirebaseRef(new Firebase("https://cura.firebaseio.com/"));
 
         // signing in variables
         mPdAuth = new ProgressDialog(this);
@@ -109,7 +108,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         progressDialog(true, "Logging in using email and password..");
 
-        mFirebaseRef.authWithPassword(s_uname, s_pw, new AuthResultHandler() {
+        app.getFirebaseRef().authWithPassword(s_uname, s_pw, new AuthResultHandler() {
             @Override
             public void onAuthenticated(AuthData authData) {
                 progressDialog(false, "");
@@ -175,7 +174,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 protected void onPostExecute(String token){
                     if (token != null) {
                     /* Successfully got OAuth token, now login with Google */
-                        mFirebaseRef.authWithOAuthToken("google", token, new AuthResultHandler() {
+                        app.getFirebaseRef().authWithOAuthToken("google", token, new AuthResultHandler() {
                             @Override
                             public void onAuthenticated(AuthData authData) {
                                 progressDialog(false, "");
