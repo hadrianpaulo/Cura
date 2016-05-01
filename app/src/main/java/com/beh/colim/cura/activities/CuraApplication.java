@@ -2,6 +2,8 @@ package com.beh.colim.cura.activities;
 
 import android.app.Application;
 
+import android.support.v7.widget.Toolbar;
+import com.beh.colim.cura.R;
 import com.firebase.client.Firebase;
 
 /**

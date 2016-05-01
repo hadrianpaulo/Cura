@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.beh.colim.cura"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,12 +29,17 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.2.0'
-    compile 'com.google.android.gms:play-services:8.4.0'
-    compile 'com.firebase:firebase-client-android:2.5.2'
     compile 'com.android.support:multidex:1.0.1'
+    compile 'com.google.android.gms:play-services-plus:8.4.0'
+    compile 'com.google.android.gms:play-services-auth:8.4.0'
+    compile 'com.google.android.gms:play-services-location:8.4.0'
+    compile 'com.google.android.gms:play-services-maps:8.4.0'
+    compile 'com.firebase:firebase-client-android:2.5.2'
+    compile 'com.firebaseui:firebase-ui:0.3.1'
+
 }
 
 apply plugin: 'com.google.gms.google-services'

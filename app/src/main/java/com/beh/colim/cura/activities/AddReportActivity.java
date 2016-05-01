@@ -1,7 +1,9 @@
 package com.beh.colim.cura.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,10 +23,16 @@ import java.util.Locale;
 
 public class AddReportActivity extends AppCompatActivity {
 
+    private Toolbar _toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_report);
+
+        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        _toolbar.setTitle("Login");
+        setSupportActionBar(_toolbar);
     }
 
     public void add(View view){
@@ -67,11 +75,11 @@ public class AddReportActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == R.id.logout_menu_item) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -20,4 +20,5 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_add_report">AddReportActivity</string>
     <string name="title_activity_seach">SeachActivity</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

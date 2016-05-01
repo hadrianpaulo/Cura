@@ -12,22 +12,20 @@ import android.widget.Toast;
 import com.beh.colim.cura.R;
 
 public class MenuActivity extends AppCompatActivity {
-    private Toolbar m_t_toolbar;
-    private CuraApplication app;
+    private Toolbar _toolbar;
+    private CuraApplication _app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        m_t_toolbar = (Toolbar) findViewById(R.id.toolbar);
-        m_t_toolbar.setTitle("Menu");
+        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        _toolbar.setTitle("Menu");
+        setSupportActionBar(_toolbar);
 
-        setSupportActionBar(m_t_toolbar);
-
-        app = (CuraApplication) getApplication();
-        Toast.makeText(MenuActivity.this, app.getUsername(), Toast.LENGTH_SHORT).show();
-
+        _app = (CuraApplication) getApplication();
+        Toast.makeText(MenuActivity.this, _app.getUsername(), Toast.LENGTH_SHORT).show();
     }
 
     public void addReport(View view){
@@ -54,11 +52,11 @@ public class MenuActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == R.id.logout_menu_item) {
+            Intent intent = new Intent(MenuActivity.this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

@@ -1,5 +1,6 @@
 package com.beh.colim.cura.activities;
 
+import android.support.v7.widget.Toolbar;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -27,6 +28,7 @@ public class SearchActivity extends AppCompatActivity implements LocationListene
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    private Toolbar _toolbar;
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
     private static final String TAG = "SearchActivity";
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
@@ -42,6 +44,10 @@ public class SearchActivity extends AppCompatActivity implements LocationListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+
+        _toolbar = (Toolbar) findViewById(R.id.toolbar);
+        _toolbar.setTitle("Login");
+        setSupportActionBar(_toolbar);
 
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
@@ -76,11 +82,11 @@ public class SearchActivity extends AppCompatActivity implements LocationListene
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if(id == R.id.logout_menu_item) {
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
