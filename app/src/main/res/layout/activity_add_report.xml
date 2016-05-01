@@ -40,10 +40,7 @@
         <EditText android:layout_width="match_parent" android:layout_height="wrap_content"
                   android:id="@+id/et_addReport_price" android:hint="Enter Price" android:textSize="15dp"
                   android:textColor="@android:color/black" android:numeric="decimal"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drugstore Name"
-                  android:id="@+id/tv_addReport_drugstore" android:textSize="15sp" android:layout_marginTop="20dp"/>
-        <EditText android:layout_width="match_parent" android:layout_height="wrap_content" android:id="@+id/et_addReport_drugstore"
-                  android:hint="Enter Drugstore Name" android:textSize="15sp" android:textColor="@android:color/black"/>
+
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Drug Availability"
                   android:id="@+id/tv_addReport_available" android:textSize="15sp" android:layout_marginTop="20dp"/>
 
@@ -73,7 +70,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Unavailable"
+                    android:text="Available"
                     android:id="@+id/textView3"
                     android:textSize="15sp"
                     android:layout_alignTop="@+id/textView2"
@@ -83,6 +80,15 @@
                     android:layout_marginEnd="26dp"/>
 
         </RelativeLayout>
+
+        <Button
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="132dp"
+                android:layout_height="31dp"
+                android:text="Pick Location"
+                android:layout_gravity="center_horizontal"
+                android:background="#e8f3ff"
+                android:onClick="pickLocation"/>
 
         <RelativeLayout
                 android:layout_width="192dp"
