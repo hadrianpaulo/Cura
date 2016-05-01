@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.beh.colim.cura.R;
 import com.beh.colim.cura.utils.DrugDetails;
-import com.beh.colim.cura.utils.Location;
+import com.beh.colim.cura.utils.LocationDetails;
 import com.firebase.client.Firebase;
 
 import java.text.DateFormat;
@@ -23,6 +23,7 @@ import java.util.Locale;
 
 public class AddReportActivity extends AppCompatActivity {
 
+    private CuraApplication _app;
     private Toolbar _toolbar;
 
     @Override
@@ -30,12 +31,15 @@ public class AddReportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_report);
 
+        _app = (CuraApplication) getApplication();
+
         _toolbar = (Toolbar) findViewById(R.id.toolbar);
         _toolbar.setTitle("Login");
         setSupportActionBar(_toolbar);
     }
 
     public void add(View view){
+
 
         Firebase ref = new Firebase("https://cura.firebaseio.com/drugs");
         String drug_name = ((EditText) findViewById(R.id.et_addReport_drugname))
@@ -49,7 +53,7 @@ public class AddReportActivity extends AppCompatActivity {
         DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm", Locale.US);
         String date = df.format(Calendar.getInstance().getTime());
 
-        Location someplace = new Location("12.42", "12.12", drugstore_name);
+        LocationDetails someplace = new LocationDetails(_app.getLat(), _app.getLon(), drugstore_name);
         DrugDetails sample = new DrugDetails(price, availability, date);
         sample.addLocation(someplace);
         ref.child(drug_name).push().setValue(sample);

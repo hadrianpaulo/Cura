@@ -14,7 +14,7 @@
                 android:id="@+id/toolbar"
                 layout="@layout/toolbar" />
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:layout_below="@+id/linearLayout">
@@ -22,15 +22,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Welcome"
-                android:id="@+id/tv_login_welcome" android:layout_marginTop="30dp" android:layout_gravity="center_horizontal"
-                android:textSize="40sp" android:textColor="#1ab9ff"/>
+                android:text="Welcome to"
+                android:id="@+id/tv_login_welcome" android:layout_gravity="center_horizontal"
+                android:textSize="40sp" android:textColor="#1ab9ff"
+                android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
+                android:layout_marginTop="44dp"/>
         <ImageView
-                android:layout_width="260dp"
-                android:layout_height="324dp"
+                android:layout_width="178dp"
+                android:layout_height="222dp"
                 android:id="@+id/imageView2" android:layout_gravity="center_horizontal"
-                android:src="@drawable/logo_name"/>
-    </LinearLayout>
+                android:src="@drawable/logo_name"
+                android:layout_below="@+id/tv_login_welcome" android:layout_centerHorizontal="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A drugstores and drugstore prices crowdsourcing application"
+                android:id="@+id/textView4" android:textAlignment="center" android:textSize="18dp"
+                android:layout_below="@+id/imageView2" android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Developed by Jerelyn Co and Hadrian Paulo Lim (2016)"
+                android:id="@+id/textView5"
+                android:layout_alignParentBottom="true" android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
 
 
 </RelativeLayout>

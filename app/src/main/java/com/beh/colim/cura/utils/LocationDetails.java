@@ -3,13 +3,13 @@ package com.beh.colim.cura.utils;
 /**
  * Created by hadri on 4/29/2016.
  */
-public class Location {
+public class LocationDetails {
 
     private String lat = "";
     private String lon = "";
     private String name = "";
 
-    public Location(String lat, String lon, String name) {
+    public LocationDetails(String lat, String lon, String name) {
 
         this.lat = lat;
         this.lon = lon;

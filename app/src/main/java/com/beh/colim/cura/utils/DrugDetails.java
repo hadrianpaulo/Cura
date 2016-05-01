@@ -9,7 +9,7 @@ public class DrugDetails {
     private String price = "";
     private boolean availability;
     private String date = "";
-    private ArrayList<Location> locations = new ArrayList<>();
+    private ArrayList<LocationDetails> locations = new ArrayList<>();
 
     public DrugDetails(String price, boolean availability, String date) {
         this.price = price;
@@ -41,11 +41,11 @@ public class DrugDetails {
         this.date = date;
     }
 
-    public ArrayList<Location> getLocations() {
+    public ArrayList<LocationDetails> getLocations() {
         return locations;
     }
 
-    public void addLocation(Location location) {
+    public void addLocation(LocationDetails location) {
         this.locations.add(location);
     }
 }
