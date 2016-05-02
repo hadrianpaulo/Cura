@@ -1,5 +1,12 @@
 package com.beh.colim.cura.activities;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -17,22 +24,15 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.beh.colim.cura.R;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
 
 public class MenuActivity extends AppCompatActivity implements LocationListener,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    private Toolbar _toolbar;
-    private CuraApplication _app;
-
     public static final int REQUEST_ID_ACCESS_COURSE_FINE_LOCATION = 100;
     private static final String TAG = "SearchActivity";
+    private Toolbar _toolbar;
+    private CuraApplication _app;
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
     private long FASTEST_INTERVAL = 2000; /* 2 sec */
 
@@ -167,12 +167,6 @@ public class MenuActivity extends AppCompatActivity implements LocationListener,
 
     @Override
     public void onLocationChanged(Location location) {
-        String msg = "Updated Location: " +
-                Double.toString(location.getLatitude()) + "," +
-                Double.toString(location.getLongitude());
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-
-
         _app.setLat(String.valueOf(location.getLatitude()));
         _app.setLon(String.valueOf(location.getLongitude()));
     }

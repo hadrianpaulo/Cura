@@ -1,7 +1,5 @@
 package com.beh.colim.cura.utils;
 
-import java.util.ArrayList;
-
 /**
  * Created by hadri on 4/29/2016.
  */
@@ -9,43 +7,28 @@ public class DrugDetails {
     private String price = "";
     private boolean availability;
     private String date = "";
-    private ArrayList<LocationDetails> locations = new ArrayList<>();
+    private LocationDetails locationDetail;
 
-    public DrugDetails(String price, boolean availability, String date) {
+    public DrugDetails(String price, boolean availability, String date, LocationDetails locationDetail) {
         this.price = price;
         this.availability = availability;
         this.date = date;
+        this.locationDetail = locationDetail;
     }
 
     public String getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public boolean isAvailable() {
+    public boolean isAvailability() {
         return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
     }
 
     public String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public ArrayList<LocationDetails> getLocations() {
-        return locations;
-    }
-
-    public void addLocation(LocationDetails location) {
-        this.locations.add(location);
+    public LocationDetails getLocationDetail() {
+        return locationDetail;
     }
 }

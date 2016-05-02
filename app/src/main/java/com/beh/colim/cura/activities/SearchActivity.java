@@ -1,34 +1,30 @@
 package com.beh.colim.cura.activities;
 
-import android.support.v7.widget.Toolbar;
-import android.widget.EditText;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.model.LatLng;
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.beh.colim.cura.R;
+import com.beh.colim.cura.utils.DrugDetails;
+import com.beh.colim.cura.utils.LocationDetails;
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.Query;
+import com.firebase.client.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
 
+    EditText _drugName;
+    CuraApplication app;
     private Toolbar _toolbar;
-    EditText _drugstoreName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,16 +35,55 @@ public class SearchActivity extends AppCompatActivity {
         _toolbar.setTitle("Search");
         setSupportActionBar(_toolbar);
 
-        _drugstoreName = (EditText) findViewById(R.id.et_search_drug_name);
+        _drugName = (EditText) findViewById(R.id.et_search_drug_name);
+        Firebase.setAndroidContext(this);
+        app = ((CuraApplication) getApplication());
 
     }
 
     public void search(View view) {
-        String searchedDrugstore = _drugstoreName.getText().toString();
+        String searchedDrug = _drugName.getText().toString();
+        app.setDrugName(searchedDrug);
 
-        Intent intent = new Intent(SearchActivity.this, LocatorActivity.class);
-        intent.putExtra("DRUGSTORE", searchedDrugstore);
-        startActivity(intent);
+        final ArrayList<DrugDetails> multipleDrugDetails = new ArrayList<>();
+        final Firebase firebaseRef = app.getFirebaseRef().child("drugs").child(searchedDrug);
+        Query queryRef = firebaseRef.orderByChild("locations/lat");
+
+
+        queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot snapshot) {
+                for (DataSnapshot i : snapshot.getChildren()) {
+
+                    DataSnapshot location_ss = i.child("locationDetail");
+                    LocationDetails locationDetails = new LocationDetails(
+                            location_ss.child("lat").getValue(String.class),
+                            location_ss.child("lon").getValue(String.class),
+                            location_ss.child("name").getValue(String.class));
+
+                    DrugDetails _drugDetails =
+                            new DrugDetails(i.child("price").getValue(String.class),
+                                    i.child("availability").getValue(Boolean.class),
+                                    i.child("date").getValue(String.class),
+                                    locationDetails);
+
+
+                    multipleDrugDetails.add(_drugDetails);
+                    app.setMultipleDrugDetails(multipleDrugDetails);
+                }
+
+                // TODO: Handle search not found
+
+                Intent intent = new Intent(SearchActivity.this, LocatorActivity.class);
+                startActivity(intent);
+
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+            }
+        });
+
     }
 
     @Override

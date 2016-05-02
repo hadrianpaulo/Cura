@@ -10,7 +10,6 @@ public class LocationDetails {
     private String name = "";
 
     public LocationDetails(String lat, String lon, String name) {
-
         this.lat = lat;
         this.lon = lon;
         this.name = name;

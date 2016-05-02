@@ -8,35 +8,55 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:orientation="vertical" android:id="@+id/linearLayout">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
 
         <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
+                layout="@layout/toolbar"/>
     </LinearLayout>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_below="@+id/linearLayout" android:padding="30dp">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceLarge" android:text="Search"
-                  android:id="@+id/tv_search_search" android:layout_margin="50dp" android:layout_gravity="center_horizontal"
-                  android:textSize="35sp" android:typeface="sans" android:textColor="#1ab9ff"/>
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout"
+            android:padding="30dp">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Search"
+                android:id="@+id/tv_search_search"
+                android:layout_margin="50dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="35sp"
+                android:typeface="sans"
+                android:textColor="#1ab9ff"/>
+
         <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
+
             <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/et_search_drug_name" android:layout_toLeftOf="@+id/b_search_search"
-                    android:layout_toStartOf="@+id/b_search_search" android:hint="Enter Drug Name"/>
+                    android:id="@+id/et_search_drug_name"
+                    android:layout_toLeftOf="@+id/b_search_search"
+                    android:layout_toStartOf="@+id/b_search_search"
+                    android:hint="Enter Drug Name"/>
+
             <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Search"
-                    android:id="@+id/b_search_search" android:layout_alignBottom="@+id/et_search_drug_name"
-                    android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
-                    android:onClick="search" style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:id="@+id/b_search_search"
+                    android:layout_alignBottom="@+id/et_search_drug_name"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:onClick="search"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
                     android:background="#e8f3ff"/>
         </RelativeLayout>
     </LinearLayout>

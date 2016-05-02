@@ -2,9 +2,10 @@ package com.beh.colim.cura.activities;
 
 import android.app.Application;
 
-import android.support.v7.widget.Toolbar;
-import com.beh.colim.cura.R;
+import com.beh.colim.cura.utils.DrugDetails;
 import com.firebase.client.Firebase;
+
+import java.util.ArrayList;
 
 /**
  * Created by jerelynco on 4/25/16.
@@ -14,6 +15,16 @@ public class CuraApplication extends Application {
     private String lat = "";
     private String lon = "";
     private Firebase firebaseRef;
+    private ArrayList<DrugDetails> multipleDrugDetails;
+    private String drugName;
+
+    public String getDrugName() {
+        return drugName;
+    }
+
+    public void setDrugName(String drugName) {
+        this.drugName = drugName;
+    }
 
     public Firebase getFirebaseRef() {
         return firebaseRef;
@@ -45,5 +56,13 @@ public class CuraApplication extends Application {
 
     public void setLon(String lon) {
         this.lon = lon;
+    }
+
+    public ArrayList<DrugDetails> getMultipleDrugDetails() {
+        return multipleDrugDetails;
+    }
+
+    public void setMultipleDrugDetails(ArrayList<DrugDetails> multipleDrugDetails) {
+        this.multipleDrugDetails = multipleDrugDetails;
     }
 }

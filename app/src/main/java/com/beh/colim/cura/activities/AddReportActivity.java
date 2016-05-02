@@ -80,11 +80,13 @@ public class AddReportActivity extends AppCompatActivity {
         String date = df.format(Calendar.getInstance().getTime());
 
         LocationDetails someplace = new LocationDetails(lat, lon, drugstore_name);
-        DrugDetails sample = new DrugDetails(price, availability, date);
-        sample.addLocation(someplace);
+        DrugDetails sample = new DrugDetails(price, availability, date, someplace);
         ref.child(drug_name).push().setValue(sample);
 
         Toast.makeText(this, "Report is added.", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(AddReportActivity.this, MenuActivity.class);
+        startActivity(intent);
+
     }
 
     public void pickLocation(View view) {

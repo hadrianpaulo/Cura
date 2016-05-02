@@ -8,36 +8,53 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:orientation="vertical" android:id="@+id/linearLayout">
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
 
         <include
                 android:id="@+id/toolbar"
-                layout="@layout/toolbar" />
+                layout="@layout/toolbar"/>
     </LinearLayout>
+
     <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:layout_below="@+id/linearLayout" android:padding="30dp">
+            android:layout_height="match_parent"
+            android:layout_below="@+id/linearLayout"
+            android:padding="30dp">
+
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Menu"
-                android:id="@+id/tv_menu_menu" android:layout_margin="50dp" android:layout_gravity="center_horizontal"
-                android:textSize="35sp" android:typeface="sans" android:textColor="#1ab9ff"/>
+                android:id="@+id/tv_menu_menu"
+                android:layout_margin="50dp"
+                android:layout_gravity="center_horizontal"
+                android:textSize="35sp"
+                android:typeface="sans"
+                android:textColor="#1ab9ff"/>
+
         <Button
                 android:layout_width="241dp"
                 android:layout_height="wrap_content"
                 android:text="Add Report"
-                android:id="@+id/b_menu_addReport" android:layout_gravity="center_horizontal" android:layout_margin="5dp"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" android:background="#e8f3ff"
+                android:id="@+id/b_menu_addReport"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:background="#e8f3ff"
                 android:onClick="addReport"/>
+
         <Button
                 android:layout_width="244dp"
                 android:layout_height="wrap_content"
                 android:text="Search Drugstore"
-                android:id="@+id/b_menu_searchDrugstore" android:layout_gravity="center_horizontal" android:layout_margin="5dp"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored" android:background="#e8f3ff"
+                android:id="@+id/b_menu_searchDrugstore"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="5dp"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:background="#e8f3ff"
                 android:onClick="searchDrugstore"/>
     </LinearLayout>
 </RelativeLayout>

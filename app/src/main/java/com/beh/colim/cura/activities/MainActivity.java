@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
+
 import com.beh.colim.cura.R;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
