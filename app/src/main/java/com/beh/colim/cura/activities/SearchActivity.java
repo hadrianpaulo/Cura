@@ -46,15 +46,15 @@ public class SearchActivity extends AppCompatActivity {
         app.setDrugName(searchedDrug);
 
         final ArrayList<DrugDetails> multipleDrugDetails = new ArrayList<>();
-        final Firebase firebaseRef = app.getFirebaseRef().child("drugs").child(searchedDrug);
+        Firebase firebaseRef = app.getFirebaseRef().child("drugs").child(searchedDrug);
         Query queryRef = firebaseRef.orderByChild("locations/lat");
 
 
         queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot snapshot) {
-                for (DataSnapshot i : snapshot.getChildren()) {
 
+                for (DataSnapshot i : snapshot.getChildren()) {
                     DataSnapshot location_ss = i.child("locationDetail");
                     LocationDetails locationDetails = new LocationDetails(
                             location_ss.child("lat").getValue(String.class),
@@ -72,7 +72,6 @@ public class SearchActivity extends AppCompatActivity {
                     app.setMultipleDrugDetails(multipleDrugDetails);
                 }
 
-                // TODO: Handle search not found
 
                 Intent intent = new Intent(SearchActivity.this, LocatorActivity.class);
                 startActivity(intent);
